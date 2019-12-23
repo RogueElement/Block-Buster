@@ -4,29 +4,21 @@
 // wxWidgets "Hello world" Program
 // For compilers that support precompilation, includes "wx/wx.h".
 
-//
-//#include "frame.h"
-//
-//class App : public wxApp
-//{
-//public:
-//	virtual bool OnInit();
-//};
-//
-//wxIMPLEMENT_APP(App);
-//
-//bool App::OnInit()
-//{
-//	MainFrame* frame = new MainFrame("Hello World", wxPoint(50, 50), wxSize(450, 340));
-//	frame->Show(true);
-//	return true;
-//}
+#include <SFML/Graphics.hpp>
 
-#include <SFML/Window.hpp>
+#define BLOCK_BUSTER "Block Buster"
 
 int main()
 {
-	sf::Window window(sf::VideoMode(800, 600), "My window");
+	sf::RenderWindow window(sf::VideoMode(800, 600), BLOCK_BUSTER);
+
+	window.setFramerateLimit(120);
+
+	sf::CircleShape shape(50.f);
+
+	// set the shape color to green
+	shape.setFillColor(sf::Color(100, 250, 50));
+	// shape.setOrigin(sf::Vector2f(400, 600));
 
 	// run the program as long as the window is open
 	while (window.isOpen())
@@ -38,7 +30,21 @@ int main()
 			// "close requested" event: we close the window
 			if (event.type == sf::Event::Closed)
 				window.close();
+			
 		}
+
+		// clear the window with black color
+		window.clear(sf::Color::Black);
+
+		// draw everything here...
+		// window.draw(...);
+		window.draw(shape);
+
+		// shape.rotate(1);
+
+		// end the current frame
+		window.display();
+
 	}
 
 	return 0;
